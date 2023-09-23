@@ -14,10 +14,7 @@ namespace ProgramCreation
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args)
         {
-            IConfiguration configuration = new ConfigurationBuilder()
-            .SetBasePath(Directory.GetCurrentDirectory())
-            .AddJsonFile("secrets.json", optional: true, reloadOnChange: true)
-            .Build();
+            IConfiguration configuration = SetupConfiguration.Setup();
 
             string host = configuration["DatabaseInfo:host"];
             string port = configuration["DatabaseInfo:port"];
