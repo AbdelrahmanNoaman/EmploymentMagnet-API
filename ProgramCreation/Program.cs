@@ -16,8 +16,8 @@ namespace ProgramCreation
         {
             IConfiguration configuration = SetupConfiguration.Setup();
 
-            string host = configuration["DatabaseInfo:host"];
-            string port = configuration["DatabaseInfo:port"];
+            string host = configuration.GetValue<string>("DatabaseInfo:host"); ;
+            string port = configuration.GetValue<string>("DatabaseInfo:port"); ;
 
             return WebHost.CreateDefaultBuilder(args)
             .UseUrls($"https://{host}:{port}")

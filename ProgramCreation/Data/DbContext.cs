@@ -17,9 +17,9 @@ namespace ProgramCreation.Data
         public DbContext()
         {
             IConfiguration configuration = SetupConfiguration.Setup();
-            _connectionString = configuration.GetConnectionString("Database");
+            _connectionString = configuration.GetValue<string>("ConnectionStrings:Database");
             _client = new CosmosClient(_connectionString);
-            _database = _client.GetDatabase(configuration["DatabaseInfo:databaseName"]);
+            _database = _client.GetDatabase(configuration.GetValue<string>("DatabaseInfo:databaseName"));
         }
         public Container GetContainer(string ContainerName)
         {

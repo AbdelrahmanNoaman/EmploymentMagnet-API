@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System;
+using System.IO;
 
 namespace ProgramCreation
 {
@@ -12,8 +14,8 @@ namespace ProgramCreation
         public static IConfiguration Setup()
         {
             return new ConfigurationBuilder()
-            .SetBasePath(Directory.GetCurrentDirectory())
-            .AddJsonFile("secrets.json", optional: true, reloadOnChange: true)
+            .SetBasePath(Path.GetDirectoryName(typeof(Program).Assembly.Location))
+            .AddJsonFile("secrets.json", optional: false)
             .Build();
         }
     }

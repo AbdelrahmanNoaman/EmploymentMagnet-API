@@ -15,4 +15,10 @@
     <PackageReference Include="Microsoft.Azure.Cosmos" Version="3.35.4" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Models\" />
+    <Folder Include="Controllers\" />
+    <Folder Include="DTOs\" />
+  </ItemGroup>
+
 </Project>
