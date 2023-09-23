@@ -9,5 +9,9 @@ namespace ProgramCreation.DTOs
     public class ObjectWithId
     {
         public string id { get; set; }
+        public ObjectWithId(string id)
+        {
+            this.id = id;
+        }
     }
 }

@@ -36,11 +36,12 @@ namespace ProgramCreation.Data.Repositories
             var result = await _container.DeleteItemAsync<Object>(programId, new PartitionKey(programId));
         }
 
-        public async Task Update(ProgramInfo programInfo)
+        public async Task<ProgramInfo> Update(ProgramInfo programInfo)
         {
             ProgramInfo result = await _container.ReadItemAsync<ProgramInfo>(programInfo.id, new PartitionKey(programInfo.id));
             result = programInfo;
             var finalResult = await _container.ReplaceItemAsync<ProgramInfo>(programInfo, programInfo.id, new PartitionKey(programInfo.id));
+            return finalResult.Resource;
         }
     }
 }

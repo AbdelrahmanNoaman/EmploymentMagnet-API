@@ -39,11 +39,11 @@ namespace ProgramCreation.Models.ProgramInfo
         public string ProgramLocation { get { return this._programLocation; } set { this._programLocation = value; } }
         public bool FullyRemote { get { return this._fullyRemote; } set { this._fullyRemote = value; } }
         public string MinQualification { get { return this._minQualification; } set { this._minQualification = value; } }
-        public int MaxNumberOfApplication { get { return this._maxNumberOfApplication; } set { this._maxNumberOfApplication = value; } }
+        public int? MaxNumberOfApplication { get { return this._maxNumberOfApplication; } set { this._maxNumberOfApplication = value; } }
 
         public ProgramInfo(string id, string title, string summary, string description, List<string> skills, string benefits, string applicationCriteria, string type, string programStart, string applicationOpen, string applicationClose, string duration, string programLocation, bool fullyRemote, string minQualification, int maxNumberOfApplication)
         {
-            Id = id;
+            this.id = id;
             Title = title;
             Summary = summary;
             Description = description;
