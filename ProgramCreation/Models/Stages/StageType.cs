@@ -8,16 +8,18 @@ namespace ProgramCreation.Models.Stages
 {
     public class StageType
     {
+        private string _id;
         private string _name;
         private string _description;
 
         public string Name { get { return _name; } set { this._name = value; } }
 
         public string Description { get { return _description; } set { this._description = value; } }
-
-        public StageType(string name,string description) {
+        public string id { get; set; }
+        public StageType(string name,string description,string id) {
             this.Name = name;
             this.Description = description;
+            this.id = id;
         }
     }
 }

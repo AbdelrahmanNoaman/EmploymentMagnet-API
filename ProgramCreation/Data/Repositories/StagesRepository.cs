@@ -10,7 +10,6 @@ namespace ProgramCreation.Data.Repositories
 
         public async Task<StageDTO> GetById(StageInfoDTO StageInfo)
         {
-
             var result = await _container.ReadItemAsync<StageDTO>(StageInfo.id, new PartitionKey(StageInfo.Type));
             return result.Resource;
         }
@@ -18,7 +17,6 @@ namespace ProgramCreation.Data.Repositories
         public async Task<StageInfoDTO> Add(StageDTO stage)
         {
             stage.id = Guid.NewGuid().ToString();
-            //IQuestion newQues = QuestionFactory.CreateQuestion(question);
             var result = await _container.CreateItemAsync(stage);
             return new StageInfoDTO { id = stage.id, Type = stage.Type };
         }
