@@ -56,5 +56,45 @@ namespace ProgramCreation.Data.Repositories
                 Console.WriteLine(error);
             }
         }
+
+        public async Task ChangeQuestionHiddenState(QuestionInfoDTO questionInfo, bool state)
+        {
+            try
+            {
+                QuestionDTO question = await this.GetById(questionInfo);
+                question.IsHidden = state;
+                var finalResult = await _container.ReplaceItemAsync<QuestionDTO>(question, question.id, new PartitionKey(question.Type));
+
+            }
+            catch (Exception error)
+            {
+                Console.WriteLine(error);
+            }
+        }
+
+        public async Task ChangeQuestionInternalState(QuestionInfoDTO questionInfo, bool state)
+        {
+            try
+            {
+                QuestionDTO question = await this.GetById(questionInfo);
+                question.IsInternal = state;
+                var finalResult = await _container.ReplaceItemAsync<QuestionDTO>(question, question.id, new PartitionKey(question.Type));
+
+            }
+            catch (Exception error)
+            {
+                Console.WriteLine(error);
+            }
+        }
+        public async Task ChangeQuestionMandatoryState(QuestionInfoDTO questionInfo, bool state)
+        {
+            try
+            {
+                QuestionDTO question = await this.GetById(questionInfo);
+                question.IsMandatory = state;
+                var finalResult = await _container.ReplaceItemAsync<QuestionDTO>(question, question.id, new PartitionKey(question.Type));
+            }
+            catch (Exception error) { Console.WriteLine(error); .}
+        }
     }
 }
