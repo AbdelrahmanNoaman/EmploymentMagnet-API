@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ProgramCreation.Models.Questions
 {
-    internal class Question
+    abstract class Question
     {
         private string _id;
         private string _title;

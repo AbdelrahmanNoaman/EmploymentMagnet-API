@@ -19,7 +19,7 @@ namespace ProgramCreation.Models.Questions
         public YesOrNoQuestion(string id, string title, string sectionName ,bool isDisqualified) : base(id, title, sectionName)
         {
             this.Type = "Yes/No";
-            this.IsDisqualified = isDisqualified;
+            this.IsDisqualified = isDisqualified == null ? isDisqualified : false;
         }
     }
 }
