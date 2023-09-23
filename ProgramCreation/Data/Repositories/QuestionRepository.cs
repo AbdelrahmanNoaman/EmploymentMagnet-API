@@ -17,76 +17,44 @@ namespace ProgramCreation.Data.Repositories
 
         public  async Task<QuestionDTO> GetById(QuestionInfoDTO questionInfo)
         {
-            try
-            {
-                var result = await _container.ReadItemAsync<QuestionDTO>(questionInfo.id, new PartitionKey(questionInfo.Type));
-                return result.Resource;
-            }
-            catch (Exception error)
-            {
-                Console.WriteLine(error);
-                return null;
-            }
+
+            var result = await _container.ReadItemAsync<QuestionDTO>(questionInfo.id, new PartitionKey(questionInfo.Type));
+            return result.Resource;
         }
 
         public  async Task<QuestionInfoDTO> Add(QuestionDTO question)
         {
             question.id = Guid.NewGuid().ToString();
-            try
-            {
-                IQuestion newQues = QuestionFactory.CreateQuestion(question);
-                var result = await _container.CreateItemAsync(newQues);
-                return new QuestionInfoDTO {id = ((Question)newQues).Id, Type=((Question)newQues).Type };
-            }
-            catch (Exception error)
-            {
-                Console.WriteLine(error);
-                return null;
-            }
+            //IQuestion newQues = QuestionFactory.CreateQuestion(question);
+            var result = await _container.CreateItemAsync(question);
+            return new QuestionInfoDTO { id = question.id, Type = question.Type };
         }
 
         public async Task Delete(QuestionInfoDTO questionInfo)
         {
-            try
-            {
-                var result = await _container.DeleteItemAsync<Object>(questionInfo.id, new PartitionKey(questionInfo.Type));
-            }
-            catch (Exception error)
-            {
-                Console.WriteLine(error);
-            }
+            var result = await _container.DeleteItemAsync<Object>(questionInfo.id, new PartitionKey(questionInfo.Type));
         }
 
         public async Task ChangeQuestionHiddenState(QuestionInfoDTO questionInfo, bool state)
         {
-                QuestionDTO question = await this.GetById(questionInfo);
-                question.IsHidden = state;
-                var finalResult = await _container.ReplaceItemAsync<QuestionDTO>(question, question.id, new PartitionKey(question.Type));
+            QuestionDTO question = await this.GetById(questionInfo);
+            question.IsHidden = state;
+            var finalResult = await _container.ReplaceItemAsync<QuestionDTO>(question, question.id, new PartitionKey(question.Type));
         }
 
         public async Task ChangeQuestionInternalState(QuestionInfoDTO questionInfo, bool state)
         {
-            try
-            {
-                QuestionDTO question = await this.GetById(questionInfo);
-                question.IsInternal = state;
-                var finalResult = await _container.ReplaceItemAsync<QuestionDTO>(question, question.id, new PartitionKey(question.Type));
+            QuestionDTO question = await this.GetById(questionInfo);
+            question.IsInternal = state;
+            var finalResult = await _container.ReplaceItemAsync<QuestionDTO>(question, question.id, new PartitionKey(question.Type));
 
-            }
-            catch (Exception error)
-            {
-                Console.WriteLine(error);
-            }
         }
         public async Task ChangeQuestionMandatoryState(QuestionInfoDTO questionInfo, bool state)
         {
-            try
-            {
-                QuestionDTO question = await this.GetById(questionInfo);
-                question.IsMandatory = state;
-                var finalResult = await _container.ReplaceItemAsync<QuestionDTO>(question, question.id, new PartitionKey(question.Type));
-            }
-            catch (Exception error) { Console.WriteLine(error); }
+            QuestionDTO question = await this.GetById(questionInfo);
+            question.IsMandatory = state;
+            var finalResult = await _container.ReplaceItemAsync<QuestionDTO>(question, question.id, new PartitionKey(question.Type));
+
         }
     }
 }

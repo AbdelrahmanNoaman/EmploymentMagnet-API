@@ -16,7 +16,7 @@ namespace ProgramCreation.Models.Questions
         private bool? _isMandatory;
         private bool? _isInternal;
 
-        public string Id
+        public string id
         {
             get { return this._id; }
             set { this._id = value; }
@@ -60,7 +60,7 @@ namespace ProgramCreation.Models.Questions
 
         public Question(string id, string title, string sectionName)
         {
-            this.Id = id;
+            this.id = id;
             this.Title = title;
             this.SectionName = sectionName;
             this.IsHidden = false;
