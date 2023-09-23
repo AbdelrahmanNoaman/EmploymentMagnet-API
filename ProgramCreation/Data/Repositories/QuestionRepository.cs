@@ -11,7 +11,7 @@ using ProgramCreation.Models.Factory;
 
 namespace ProgramCreation.Data.Repositories
 {
-    internal class QuestionRepository:IRepository<QuestionDTO,QuestionInfoDTO>
+    public class QuestionRepository:IRepository<QuestionDTO,QuestionInfoDTO>
     {
         private  Microsoft.Azure.Cosmos.Container _container = new DbContext().GetContainer("questions");
 
@@ -59,17 +59,9 @@ namespace ProgramCreation.Data.Repositories
 
         public async Task ChangeQuestionHiddenState(QuestionInfoDTO questionInfo, bool state)
         {
-            try
-            {
                 QuestionDTO question = await this.GetById(questionInfo);
                 question.IsHidden = state;
                 var finalResult = await _container.ReplaceItemAsync<QuestionDTO>(question, question.id, new PartitionKey(question.Type));
-
-            }
-            catch (Exception error)
-            {
-                Console.WriteLine(error);
-            }
         }
 
         public async Task ChangeQuestionInternalState(QuestionInfoDTO questionInfo, bool state)
@@ -94,7 +86,7 @@ namespace ProgramCreation.Data.Repositories
                 question.IsMandatory = state;
                 var finalResult = await _container.ReplaceItemAsync<QuestionDTO>(question, question.id, new PartitionKey(question.Type));
             }
-            catch (Exception error) { Console.WriteLine(error); .}
+            catch (Exception error) { Console.WriteLine(error); }
         }
     }
 }

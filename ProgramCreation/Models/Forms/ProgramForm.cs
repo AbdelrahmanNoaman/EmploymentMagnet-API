@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProgramCreation.Interfaces
+namespace ProgramCreation.Models.Forms
 {
-    public interface IQuestion
+    internal class ProgramForm
     {
     }
 }

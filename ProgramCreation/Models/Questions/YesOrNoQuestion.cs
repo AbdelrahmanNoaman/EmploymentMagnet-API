@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ProgramCreation.Models.Questions
 {
-    internal class YesOrNoQuestion : Question, IQuestion
+    public class YesOrNoQuestion : Question, IQuestion
     {
         private bool _isDisqualified;
 

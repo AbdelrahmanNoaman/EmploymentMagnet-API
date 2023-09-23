@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ProgramCreation.Interfaces
 {
-    internal interface IRepository<OBJECT,INFO>
+    public interface IRepository<OBJECT,INFO>
     {
         Task<OBJECT>    GetById (INFO info);
         Task<INFO>      Add     (OBJECT element);

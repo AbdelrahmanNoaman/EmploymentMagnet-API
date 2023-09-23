@@ -9,7 +9,7 @@ using ProgramCreation.DTOs;
 
 namespace ProgramCreation.Models.Factory
 {
-    internal class QuestionFactory
+    public class QuestionFactory
     {
             
             public static IQuestion CreateQuestion(QuestionDTO quesInfo)
@@ -18,10 +18,10 @@ namespace ProgramCreation.Models.Factory
                 //We need to make an extra check here as the type should be from the stored ones in database;
                 return quesInfo.Type switch
                 {
-                    "Yes/No" => new YesOrNoQuestion(newId, quesInfo.Title, quesInfo.SectionName, (bool)quesInfo.IsDisqualified),
-                    "Dropdown" => new DropdownQuestion(newId, quesInfo.Title, quesInfo.SectionName, quesInfo.Choices, (bool)quesInfo.EnableOther),
-                    "Multiple choice" => new MultipleChoiceQuestion(newId, quesInfo.Title, quesInfo.SectionName, quesInfo.Choices, (bool)quesInfo.EnableOther, (int)quesInfo.MaxChoiceAllowed),
-                    _ => new NormalQuestion(newId, quesInfo.Title, quesInfo.SectionName, quesInfo.Type)
+                    "Yes/No" => new YesOrNoQuestion(quesInfo.id, quesInfo.Title, quesInfo.SectionName, (bool)quesInfo.IsDisqualified),
+                    "Dropdown" => new DropdownQuestion(quesInfo.id, quesInfo.Title, quesInfo.SectionName, quesInfo.Choices, (bool)quesInfo.EnableOther),
+                    "Multiple choice" => new MultipleChoiceQuestion(quesInfo.id, quesInfo.Title, quesInfo.SectionName, quesInfo.Choices, (bool)quesInfo.EnableOther, (int)quesInfo.MaxChoiceAllowed),
+                    _ => new NormalQuestion(quesInfo.id, quesInfo.Title, quesInfo.SectionName, quesInfo.Type)
                 } ;
             }
     }

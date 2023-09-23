@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ProgramCreation.Models.Questions
 {
-    abstract class ChoiceQuestion : Question, IQuestion
+    public abstract class ChoiceQuestion : Question, IQuestion
     {
         private List<string> _choices;
         private bool _enableOther;

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ProgramCreation.DTOs
 {
-    internal class QuestionDTO
+    public class QuestionDTO
     {
             public string? id { get; set; }
         [Required]

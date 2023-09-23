@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ProgramCreation.DTOs
 {
-    internal class ResponseDTO<T>
+    public class ResponseDTO<T>
     {
         public int StatusCode { get; set; }
         public string StatusDescription { get; set; }

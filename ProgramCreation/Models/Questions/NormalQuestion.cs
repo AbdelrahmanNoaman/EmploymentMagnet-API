@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ProgramCreation.Models.Questions
 {
-    internal class NormalQuestion:Question,IQuestion
+    public class NormalQuestion:Question,IQuestion
     {
         public NormalQuestion(string id, string title, string sectionName, string type) :base(id, title, sectionName)
         {

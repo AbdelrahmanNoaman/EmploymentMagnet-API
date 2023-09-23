@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ProgramCreation.Data
 {
-    internal class DbContext
+    public class DbContext
     {
         private string _connectionString;
         private CosmosClient _client;

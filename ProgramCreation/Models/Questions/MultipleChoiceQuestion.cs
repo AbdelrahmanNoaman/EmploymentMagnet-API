@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ProgramCreation.Models.Questions
 {
-    internal class MultipleChoiceQuestion : ChoiceQuestion, IQuestion
+    public class MultipleChoiceQuestion : ChoiceQuestion, IQuestion
     {
 
         private int _maxChoiceAllowed;
