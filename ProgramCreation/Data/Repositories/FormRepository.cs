@@ -18,16 +18,8 @@ namespace ProgramCreation.Data.Repositories
 
         public async Task<ProgramForm> GetById(string formId)
         {
-            try
-            {
-                var result = await _container.ReadItemAsync<ProgramForm>(formId, new PartitionKey(formId));
-                return result.Resource;
-            }
-            catch (Exception error)
-            {
-                Console.WriteLine(error);
-                return null;
-            }
+            var result = await _container.ReadItemAsync<ProgramForm>(formId, new PartitionKey(formId));
+            return result.Resource;
         }
 
         public async Task<String> Add(ProgramForm form)
