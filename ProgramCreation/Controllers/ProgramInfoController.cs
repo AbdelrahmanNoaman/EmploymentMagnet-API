@@ -17,11 +17,11 @@ namespace ProgramCreation.Controllers
 
         [Route("api/programInfo/")]
         [HttpGet]
-        public async Task<ResponseDTO<ProgramInfo>> GetProgramInfo(string programInfoId)
+        public async Task<ResponseDTO<ProgramInfo>> GetProgramInfo(ObjectWithId programInfoId)
         {
             try
             {
-                ProgramInfo programInfo = await _infoRepo.GetById(programInfoId);
+                ProgramInfo programInfo = await _infoRepo.GetById(programInfoId.id);
                 ResponseDTO<ProgramInfo> response = new(200, "Program Info Has Been Returned Successfully", programInfo);
                 return response;
             }
