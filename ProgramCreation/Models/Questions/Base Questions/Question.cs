@@ -64,7 +64,7 @@ namespace ProgramCreation.Models.Questions
             this.Title = title;
             this.SectionName = sectionName;
             this.IsHidden = false;
-            switch (this.Title)
+            switch (this.SectionName)
             {
                 case "Personal Information":
                     this.IsInternal = false; break;
