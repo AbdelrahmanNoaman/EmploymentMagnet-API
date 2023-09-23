@@ -19,11 +19,11 @@ namespace ProgramCreation.Controllers
 
         [Route("api/form/")]
         [HttpGet]
-        public async Task<ResponseDTO<FormDTO>> GetForm(FormQuestionDTO formQues)
+        public async Task<ResponseDTO<FormDTO>> GetForm(FormQuesInfoDTO formQues)
         {
             try
             {
-                ProgramForm form = await _formRepo.GetById(formQues.formId);
+                ProgramForm form = await _formRepo.GetById(formQues.FormId);
 
                 List<QuestionDTO> personalInformationQuestions  = new List<QuestionDTO>();
                 List<QuestionDTO> profileQuestions              = new List<QuestionDTO>();
@@ -32,7 +32,7 @@ namespace ProgramCreation.Controllers
                 foreach(QuestionInfoDTO questionInfo in form.QuestionsIds)
                 {
                     QuestionDTO question = await _quesRepo.GetById(questionInfo);
-                    switch (question.Title)
+                    switch (question.SectionName)
                     {
                         case "Personal Information":
                             personalInformationQuestions.Add(question); break;
@@ -55,12 +55,12 @@ namespace ProgramCreation.Controllers
 
         [Route("api/form/addQuestion")]
         [HttpPut]
-        public async Task<ResponseDTO<QuestionInfoDTO>> AddQuestion(QuestionDTO ques,string formId)
+        public async Task<ResponseDTO<QuestionInfoDTO>> AddQuestion(FormQuestionDTO ques)
         {
             try
             {
-                QuestionInfoDTO question = await _quesRepo.Add(ques);
-                await _formRepo.AddQuestion(formId,question);
+                QuestionInfoDTO question = await _quesRepo.Add(ques.Question);
+                await _formRepo.AddQuestion(ques.FormId,question);
                 ResponseDTO<QuestionInfoDTO> response = new(200, "Question Has Been Added Successfully", question);
                 return response;
             }
@@ -74,12 +74,12 @@ namespace ProgramCreation.Controllers
 
         [Route("api/form/removeQuestion")]
         [HttpPut]
-        public async Task<ResponseDTO<string>> RemoveQuestion(QuestionInfoDTO questionInfo, string formId)
+        public async Task<ResponseDTO<string>> RemoveQuestion(FormQuesInfoDTO ques)
         {
             try
             {
-                await _formRepo.DeleteQuestion(formId, questionInfo);
-                await _quesRepo.Delete(questionInfo);
+                await _formRepo.DeleteQuestion(ques.FormId, ques.QuestionInfo);
+                await _quesRepo.Delete(ques.QuestionInfo);
                 ResponseDTO<string> response = new(200, "Question Has Been Deleted Successfully", "Deleted");
                 return response;
             }

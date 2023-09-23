@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace ProgramCreation.DTOs
 {
-    public class FormQuestionDTO
+    public class FormQuesInfoDTO
     {
-        public QuestionDTO? Question { get; set; }
+        public QuestionInfoDTO? QuestionInfo { get; set; }
         public string FormId { get; set; }
-
     }
 }
