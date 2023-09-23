@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace ProgramCreation.Interfaces
 {
-    internal interface IRepository<T>
+    internal interface IRepository<OBJECT,INFO>
     {
-        IEnumerable<T> GetAll();
-        void Add(T element);
-        void Delete(T element);
+        Task<OBJECT>    GetById (INFO info);
+        Task<INFO>      Add     (OBJECT element);
+        Task            Delete  (INFO element);
     }
 }

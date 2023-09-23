@@ -11,14 +11,11 @@ namespace ProgramCreation.Models.Factory
 {
     internal class QuestionFactory
     {
-        internal class QuestionsFactory
-        {
             
             public static IQuestion CreateQuestion(QuestionDTO quesInfo)
             {
 
                 //We need to make an extra check here as the type should be from the stored ones in database;
-                string newId = Guid.NewGuid().ToString();
                 return quesInfo.Type switch
                 {
                     "Yes/No" => new YesOrNoQuestion(newId, quesInfo.Title, quesInfo.SectionName, (bool)quesInfo.IsDisqualified),
@@ -27,6 +24,5 @@ namespace ProgramCreation.Models.Factory
                     _ => new NormalQuestion(newId, quesInfo.Title, quesInfo.SectionName, quesInfo.Type)
                 } ;
             }
-        }
     }
 }
