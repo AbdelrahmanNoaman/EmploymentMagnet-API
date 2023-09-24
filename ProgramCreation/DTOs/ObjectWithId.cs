@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace ProgramCreation.DTOs
 {
+    //DTO that is used for sending just an id of an object
     public class ObjectWithId
     {
         public string id { get; set; }

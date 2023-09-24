@@ -2,6 +2,7 @@
 
 namespace ProgramCreation.DTOs
 {
+    //Contains the detailed data about the form, not only the question ids, but the questions and their details
     public class FormDTO
     {
         public string Id { get; set; }

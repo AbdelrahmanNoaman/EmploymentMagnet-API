@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace ProgramCreation.Enums
 {
+    //Time Enum which is used for video interviews
     public enum TimeEnum
     {
         Sec = 0,

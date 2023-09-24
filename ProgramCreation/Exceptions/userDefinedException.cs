@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace ProgramCreation.Exceptions
 {
+    //A user defined exception that will be handled different than the normal ones
     public class userDefinedException:Exception
     {
         public int StatusCode { get; set; }

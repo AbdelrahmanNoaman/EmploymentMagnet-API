@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace ProgramCreation.DTOs
 {
+    //All The details of the question that should be returned to the user
     public class QuestionDTO
     {
             public string? id { get; set; }

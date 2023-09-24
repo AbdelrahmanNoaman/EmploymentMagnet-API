@@ -7,6 +7,7 @@ using ProgramCreation.Models;
 
 namespace ProgramCreation.DTOs
 {
+    //DTO is used to add a program info to a specified program using its id
     public class ProgramInfoDTO
     {
         public ProgramInfo programInfo { get; set; }

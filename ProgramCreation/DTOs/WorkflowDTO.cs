@@ -8,6 +8,7 @@ using ProgramCreation.Models;
 
 namespace ProgramCreation.DTOs
 {
+    //Contains all the data of the workflow not only the ids of the stages, but the ids and the stages themselves 
     public class WorkflowDTO
     {
 

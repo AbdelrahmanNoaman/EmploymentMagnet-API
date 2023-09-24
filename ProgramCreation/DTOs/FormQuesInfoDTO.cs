@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace ProgramCreation.DTOs
 {
+    //DTO is used to add question Info for the form
     public class FormQuesInfoDTO
     {
         public QuestionInfoDTO? QuestionInfo { get; set; }

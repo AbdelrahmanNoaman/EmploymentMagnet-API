@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace ProgramCreation.DTOs
 {
+    //Contains all the data of the Stage as the user will receive
     public class StageDTO
     {
         public string? id { get; set; }

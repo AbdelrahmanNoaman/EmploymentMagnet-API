@@ -3,6 +3,7 @@
 
 namespace ProgramCreation.DTOs
 {
+    //DTO that is used to send all the needed details about a program not only ids of its components
     public class ProgramDTO
     {
 

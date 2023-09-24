@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace ProgramCreation.DTOs
 {
+    //contains the program information that will be created once the user wants to add a new program
     public class ProgramInformationDTO
     {
         public string ProgramId { get; set; }
