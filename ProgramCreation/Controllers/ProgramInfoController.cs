@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ProgramCreation.Data.Repositories;
 using ProgramCreation.DTOs;
+using ProgramCreation.Models;
 using ProgramCreation.Models.ProgramInfo;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,7 @@ namespace ProgramCreation.Controllers
     public class ProgramInfoController:Controller
     {
         private ProgramInfoRepository _infoRepo = new();
+        private ProgramInfoRepository _programRepo = new();
 
         [Route("api/programInfo/")]
         [HttpGet]
@@ -34,11 +36,12 @@ namespace ProgramCreation.Controllers
 
         [Route("api/programInfo/")]
         [HttpPost]
-        public async Task<ResponseDTO<ObjectWithId>> AddProgramInfo(ProgramInfo programInfo)
+        public async Task<ResponseDTO<ObjectWithId>> AddProgramInfo(ProgramInfoDTO program)
         {
             try
             {
-                string programInfoId = await _infoRepo.Add(programInfo);
+                string programInfoId = await _infoRepo.Add(program.programInfo);
+                await _programRepo.AddProgramInfo(ProgramInoId, program.ProgramId);
                 ResponseDTO<ObjectWithId> response = new(200, "Program Info Has Been Added Successfully", new ObjectWithId(programInfoId));
                 return response;
             }

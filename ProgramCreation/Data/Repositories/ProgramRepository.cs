@@ -2,6 +2,7 @@
 using ProgramCreation.Interfaces;
 using ProgramCreation.Models;
 using Microsoft.Azure.Cosmos;
+using ProgramCreation.Models.Questions;
 
 namespace ProgramCreation.Data.Repositories
 {
@@ -25,6 +26,13 @@ namespace ProgramCreation.Data.Repositories
         public async Task Delete(string formId)
         {
             var result = await _container.DeleteItemAsync<Object>(formId, new PartitionKey(formId));
+        }
+
+        public async Task AddProgramInfo(string programIfnoId, string programId)
+        {
+            FullProgram prog = await this.GetById(programId);
+            prog.ProgramInfoId = programIfnoId;
+            await _container.ReplaceItemAsync<FullProgram>(prog, prog.id, new PartitionKey(prog.id));
         }
     }
 }
