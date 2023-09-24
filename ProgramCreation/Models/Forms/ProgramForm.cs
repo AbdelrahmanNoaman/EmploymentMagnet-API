@@ -16,5 +16,11 @@ namespace ProgramCreation.Models.Forms
         public string id { get { return this._id; } set { this._id = value; }}
         public bool IsCoverImgExist { get { return this._isCoverImgExist; } set { this._isCoverImgExist = value; } }
         public List<QuestionInfoDTO> QuestionsIds { get { return this._questionIds; } set { this._questionIds = value; } }
+
+        public ProgramForm()
+        {
+            IsCoverImgExist = false;
+            QuestionsIds = new List<QuestionInfoDTO>();
+        }
     }
 }

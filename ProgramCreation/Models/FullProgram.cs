@@ -11,7 +11,7 @@ namespace ProgramCreation.Models
 {
     public class FullProgram
     {
-        private string _id;
+        private string? _id;
         private string? _programInfoId;
         private string _programFormId;
         private string _programWorkflowId;
@@ -27,6 +27,10 @@ namespace ProgramCreation.Models
             this.ProgramFormId = programFormId;
             this.ProgramWorkflowId = programWorkflowId;
             this.ProgramInfoId = programInfoId;
+        }
+        public FullProgram()
+        {
+            
         }
 
     }

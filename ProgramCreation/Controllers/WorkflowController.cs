@@ -15,23 +15,15 @@ namespace ProgramCreation.Controllers
         private WorkflowRepository _workflowRepo = new();
         private StagesTypeRepository _stagesTypeRepo = new();
 
+        private WorkflowStageRepository _workflowStageRepo = new();
+
         [Route("api/workflow/")]
         [HttpGet]
         public async Task<ResponseDTO<WorkflowDTO>> GetWorkflow(WorkflowStageDTO workflowStages)
         {
             try
             {
-                Workflow workflow = await _workflowRepo.GetById(workflowStages.workflowId);
-
-                List<StageDTO> stages = new List<StageDTO>();
-
-                foreach (StageInfoDTO stageInfo in workflow.Stages)
-                {
-                    StageDTO stage = await _stageRepo.GetById(stageInfo);
-                    stages.Add(stage);
-                }
-                List <StageType> types = await _stagesTypeRepo.GetAllTypes();
-                WorkflowDTO ResultantWorkflow = new WorkflowDTO(workflow.id,stages,types);
+                WorkflowDTO ResultantWorkflow = await _workflowStageRepo.GetFullInformation(workflowStages.workflowId);
                 ResponseDTO<WorkflowDTO> response = new(200, "Workflow Has Been Returned Successfully", ResultantWorkflow);
                 return response;
             }

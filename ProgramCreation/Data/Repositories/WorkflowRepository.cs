@@ -19,7 +19,6 @@ namespace ProgramCreation.Data.Repositories
         public async Task<String> Add(Workflow workflow)
         {
             workflow.id = Guid.NewGuid().ToString();
-            workflow.Stages = new List<StageInfoDTO>();
             var result = await _container.CreateItemAsync(workflow);
             return workflow.id;
         }

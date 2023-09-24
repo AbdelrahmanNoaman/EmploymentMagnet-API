@@ -17,5 +17,9 @@ namespace ProgramCreation.Models.Workflow
             this.Stages = stages;
             this.id = id;
         }
+        public Workflow()
+        {
+            this.Stages = new List<StageInfoDTO>();
+        }
     }
 }

@@ -7,7 +7,7 @@ namespace ProgramCreation.Data.Repositories
 {
     public class ProgramRepository : IRepository<FullProgram, string>
     {
-        private Microsoft.Azure.Cosmos.Container _container = new DbContext().GetContainer("forms");
+        private Microsoft.Azure.Cosmos.Container _container = new DbContext().GetContainer("programs");
 
         public async Task<FullProgram> GetById(string programId)
         {

@@ -11,6 +11,7 @@ namespace ProgramCreation.Controllers
     {
         private QuestionRepository _quesRepo = new();
         private FormRepository _formRepo = new();
+        private FormQuestionRepository _formQuesRepo = new();
 
         [Route("api/form/")]
         [HttpGet]
@@ -18,26 +19,7 @@ namespace ProgramCreation.Controllers
         {
             try
             {
-                ProgramForm form = await _formRepo.GetById(formQues.FormId);
-
-                List<QuestionDTO> personalInformationQuestions  = new List<QuestionDTO>();
-                List<QuestionDTO> profileQuestions              = new List<QuestionDTO>();
-                List<QuestionDTO> additionalQuestions           = new List<QuestionDTO>();
-
-                foreach(QuestionInfoDTO questionInfo in form.QuestionsIds)
-                {
-                    QuestionDTO question = await _quesRepo.GetById(questionInfo);
-                    switch (question.SectionName)
-                    {
-                        case "Personal Information":
-                            personalInformationQuestions.Add(question); break;
-                        case "Profile":
-                            profileQuestions.Add(question); break;
-                        default:
-                            additionalQuestions.Add(question); break;
-                    }
-                }
-                FormDTO ResultantForm = new FormDTO(form,personalInformationQuestions, profileQuestions,additionalQuestions);
+                FormDTO ResultantForm = await _formQuesRepo.GetFullInformation(formQues.FormId);
                 ResponseDTO<FormDTO> response = new(200, "Form Has Been Returned Successfully", ResultantForm);
                 return response;
             }
