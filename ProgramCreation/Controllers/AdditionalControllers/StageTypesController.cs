@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace ProgramCreation.Controllers.AdditionalControllers
 {
     [ApiController]
-    public class FormController : Controller
+    public class StageTypesController : Controller
     {
         private StagesTypeRepository _stageTypesRepo = new();
 
@@ -32,14 +32,14 @@ namespace ProgramCreation.Controllers.AdditionalControllers
             }
         }
 
-        [Route("api/stageTypes")]
+        [Route("api/stageTypes/")]
         [HttpPost]
         public async Task<ResponseDTO<StageType>> AddStageType(StageType type)
         {
             try
             {
                 await _stageTypesRepo.Add(type);
-                ResponseDTO<StageType> response = new(200, "Question Has Been Added Successfully", type);
+                ResponseDTO<StageType> response = new(200, "Stage Has Been Added Successfully", type);
                 return response;
             }
             catch (Exception error)

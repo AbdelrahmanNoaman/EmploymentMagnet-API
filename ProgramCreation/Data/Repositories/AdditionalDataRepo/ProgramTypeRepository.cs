@@ -9,17 +9,7 @@ namespace ProgramCreation.Data.Repositories.AdditionalDataRepo
 
         public async Task<List<ProgramType>> GetAllTypes()
         {
-            var result = _container.GetItemQueryIterator<ProgramType>("SELECT * FROM c");
-            List<ProgramType> types = new List<ProgramType>();
-            while (result.HasMoreResults)
-            {
-                var response = await result.ReadNextAsync();
-                foreach (var item in response)
-                {
-                    types.Add(item);
-                }
-            }
-            return types;
+            return await AdditionalDataRepository<ProgramType>.GetAllTypes(_container);
         }
 
         public async Task Add(ProgramType programType)

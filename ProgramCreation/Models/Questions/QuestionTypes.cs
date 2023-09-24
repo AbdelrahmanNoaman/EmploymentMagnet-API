@@ -9,12 +9,10 @@ namespace ProgramCreation.Models
     public class QuestionTypes
     {
         private string _name;
+        private string? _id;
 
         public string Name { get { return _name; } set { this._name = value; } }
+        public string? id { get { return _id; } set { this._id = value; } }
 
-        public QuestionTypes(string name)
-        {
-            this.Name = name;
-        }
     }
 }

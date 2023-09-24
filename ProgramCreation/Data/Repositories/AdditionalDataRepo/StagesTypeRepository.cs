@@ -1,5 +1,6 @@
 ﻿using ProgramCreation.Models;
 using Microsoft.Azure.Cosmos;
+using ProgramCreation.Data.Repositories.AdditionalDataRepo;
 
 namespace ProgramCreation.Data.Repositories
 {
@@ -9,17 +10,7 @@ namespace ProgramCreation.Data.Repositories
 
         public async Task<List<StageType>> GetAllTypes()
         {
-            var result =  _container.GetItemQueryIterator<StageType>("SELECT * FROM c");
-            List<StageType> types = new List<StageType>();
-            while (result.HasMoreResults)
-            {
-                var response = await result.ReadNextAsync();
-                foreach (var item in response)
-                {
-                    types.Add(item);
-                }
-            }
-            return types;
+            return await AdditionalDataRepository<StageType>.GetAllTypes(_container);
         }
 
         public async Task Add(StageType stageType)
