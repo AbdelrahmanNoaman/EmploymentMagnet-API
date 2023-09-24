@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace ProgramCreation.Models
 {
+    //Contains all the available types of programs that you can generate
     public class ProgramType
     {
         private string _name;

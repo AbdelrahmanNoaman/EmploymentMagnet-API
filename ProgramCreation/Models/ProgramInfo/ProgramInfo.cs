@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace ProgramCreation.Models
 {
+    //Contains all the data needed for the program except the form and the workflow
     public class ProgramInfo
     {
         private string? _id;

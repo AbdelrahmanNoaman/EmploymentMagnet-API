@@ -11,11 +11,13 @@ namespace ProgramCreation.Models
 {
     public class QuestionFactory
     {
+        //Question Factory is Responsible for making a new Question Depening on it's type
+        //As each type of Questions Has it's own Specifications
+        //So I decided to make this using Factory design pattern
             
             public static IQuestion CreateQuestion(QuestionDTO quesInfo)
             {
 
-                //We need to make an extra check here as the type should be from the stored ones in database;
                 return quesInfo.Type switch
                 {
                     "Yes/No" => new YesOrNoQuestion(quesInfo.id, quesInfo.Title, quesInfo.SectionName, (bool)quesInfo.IsDisqualified),

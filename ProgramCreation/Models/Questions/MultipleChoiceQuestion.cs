@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace ProgramCreation.Models
 {
+    //Multiple cohice question is a question that inherits from choice question as it neees the extra choices and allow others fields of the choice questions
     public class MultipleChoiceQuestion : ChoiceQuestion, IQuestion
     {
 

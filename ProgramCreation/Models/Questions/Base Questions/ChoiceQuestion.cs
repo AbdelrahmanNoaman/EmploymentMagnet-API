@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace ProgramCreation.Models
 {
+    //Base class for Choice questions like Multiple Choice and Dropdown
+    //as the both have the properties of choices and enable others
+    //then it would be better to set them together in that base class and they would both inherit from it
     public abstract class ChoiceQuestion : Question, IQuestion
     {
         private List<string> _choices;

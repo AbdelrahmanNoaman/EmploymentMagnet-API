@@ -10,9 +10,9 @@ namespace ProgramCreation.Controllers
     [ApiController]
     public class FormController:Controller
     {
-        private QuestionRepository _quesRepo = new();
-        private FormRepository _formRepo = new();
-        private FormQuestionRepository _formQuesRepo = new();
+        private readonly QuestionRepository _quesRepo = new();
+        private readonly FormRepository _formRepo = new();
+        private readonly FormQuestionRepository _formQuesRepo = new();
 
         [Route("api/form/")]
         [HttpGet]

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace ProgramCreation.Models
 {
+    //This class contains the available types that any question can have which are multiple choice,short answer , paragraph , etc...
     public class QuestionTypes
     {
         private string _name;

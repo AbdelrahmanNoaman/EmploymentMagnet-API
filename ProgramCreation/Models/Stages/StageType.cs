@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace ProgramCreation.Models
 {
+    //describes all the possible types of the stages that we may have in our workflow of the project
     public class StageType
     {
         private string? _id;

@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 
 namespace ProgramCreation.Models
 {
+    //yes or no question has a specif field that isolated itself from the normal question which is that 
+    //if the user answered not on it then it woul be disqualified
     public class YesOrNoQuestion : Question, IQuestion
     {
         private bool _isDisqualified;

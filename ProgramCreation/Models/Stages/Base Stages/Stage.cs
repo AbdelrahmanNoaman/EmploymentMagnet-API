@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 namespace ProgramCreation.Models
 {
+    //Stage is the base class that all the types of stages depend on
+    //they all share the same things except the Video interview as it may contains a question inside of it and details about the interview so it inherits from this class
     public class Stage
     {
         private string _id;

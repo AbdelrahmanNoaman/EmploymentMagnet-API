@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace ProgramCreation.Models
 {
+    //Base class for all Questions
+    //As it contains All the required data that will be needed in each question..may by other questions will have additional data
+    //and then those data will be added in their classes
     public abstract class Question
     {
         private string _id;

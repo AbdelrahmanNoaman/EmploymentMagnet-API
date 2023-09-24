@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace ProgramCreation.Models
 {
+    //Form of the application that contains all the needed data for the application of the program
+    //It contains only the list of question Ids which will be stored in the database just to minimize the space locate as much as possible
+    //And when we are going to retrieve it, then We would expand that id and get the needed data
     public class ProgramForm
     {
 

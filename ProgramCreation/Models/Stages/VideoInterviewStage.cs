@@ -8,6 +8,7 @@ using ProgramCreation.Models;
 
 namespace ProgramCreation.Models
 {
+    //A special type of stages as it has etra information that we need to no about that interview so it's seperated in a driven class
     public class VideoInterviewStage:Stage
     {
         private string _interviewQuestion;
