@@ -39,7 +39,7 @@ namespace ProgramCreation.Data.Repositories
         public async Task DeleteStage(string workflowId, StageInfoDTO stageInfo)
         {
             Workflow workflow = await this.GetById(workflowId);
-            workflow.Stages.Remove(stageInfo);
+            (workflow.Stages).RemoveAll(info => info.id==stageInfo.id && info.Type==stageInfo.Type);
             await _container.ReplaceItemAsync<Workflow>(workflow, workflowId, new PartitionKey(workflowId));
         }
     }

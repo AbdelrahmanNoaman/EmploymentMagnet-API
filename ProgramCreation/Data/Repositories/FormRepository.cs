@@ -57,7 +57,7 @@ namespace ProgramCreation.Data.Repositories
         public async Task DeleteQuestion(string formId, QuestionInfoDTO quesInfo)
         {
             ProgramForm form = await this.GetById(formId);
-            form.QuestionsIds.Remove(quesInfo);
+            (form.QuestionsIds).RemoveAll(info => info.id == quesInfo.id && info.Type == quesInfo.Type);
             await _container.ReplaceItemAsync<ProgramForm>(form, formId, new PartitionKey(formId));
         }
     }
