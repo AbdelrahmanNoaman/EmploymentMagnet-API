@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace ProgramCreation.Interfaces
 {
+    //Interface that is used for Factory when generating the questions
     public interface IQuestion
     {
     }
