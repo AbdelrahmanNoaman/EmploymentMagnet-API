@@ -15,7 +15,7 @@ namespace ProgramCreation.Controllers
     public class ProgramInfoController:Controller
     {
         private ProgramInfoRepository _infoRepo = new();
-        private ProgramInfoRepository _programRepo = new();
+        private ProgramRepository _programRepo = new();
 
         [Route("api/programInfo/")]
         [HttpGet]
@@ -41,7 +41,7 @@ namespace ProgramCreation.Controllers
             try
             {
                 string programInfoId = await _infoRepo.Add(program.programInfo);
-                await _programRepo.AddProgramInfo(ProgramInoId, program.ProgramId);
+                await _programRepo.AddProgramInfo(programInfoId, program.ProgramId);
                 ResponseDTO<ObjectWithId> response = new(200, "Program Info Has Been Added Successfully", new ObjectWithId(programInfoId));
                 return response;
             }
