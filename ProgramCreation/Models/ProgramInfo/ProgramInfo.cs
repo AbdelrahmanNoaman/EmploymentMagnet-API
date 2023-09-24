@@ -9,19 +9,19 @@ namespace ProgramCreation.Models
     public class ProgramInfo
     {
         private string? _id;
-        private string _title;
+        private string? _title;
         private string? _summary;
-        private string _description;
+        private string? _description;
         private List<string>? _skills;
         private string? _benefits;
         private string? _applicationCriteria;
-        private string _type;
+        private string? _type;
         private string? _programStart;
-        private string _applicationOpen;
-        private string _applicationClose;
+        private string? _applicationOpen;
+        private string? _applicationClose;
         private string? _duration;
-        private string _programLocation;
-        private bool _fullyRemote;
+        private string? _programLocation;
+        private bool? _fullyRemote;
         private string? _minQualification;
         private int? _maxNumberOfApplication;
         public string id { get { return this._id; } set { this._id = value; } }
@@ -37,7 +37,7 @@ namespace ProgramCreation.Models
         public string ApplicationClose { get { return this._applicationClose; } set { this._applicationClose = value; } }
         public string Duration { get { return this._duration; } set { this._duration = value; } }
         public string ProgramLocation { get { return this._programLocation; } set { this._programLocation = value; } }
-        public bool FullyRemote { get { return this._fullyRemote; } set { this._fullyRemote = value; } }
+        public bool? FullyRemote { get { return this._fullyRemote; } set { this._fullyRemote = value; } }
         public string MinQualification { get { return this._minQualification; } set { this._minQualification = value; } }
         public int? MaxNumberOfApplication { get { return this._maxNumberOfApplication; } set { this._maxNumberOfApplication = value; } }
 

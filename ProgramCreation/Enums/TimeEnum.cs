@@ -8,7 +8,7 @@ namespace ProgramCreation.Enums
 {
     public enum TimeEnum
     {
-        Sec,
-        Min
+        Sec = 0,
+        Min = 1
     }
 }

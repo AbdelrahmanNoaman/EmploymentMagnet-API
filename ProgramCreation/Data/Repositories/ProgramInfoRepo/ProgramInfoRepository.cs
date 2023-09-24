@@ -1,6 +1,7 @@
 ﻿using ProgramCreation.Interfaces;
 using Microsoft.Azure.Cosmos;
 using ProgramCreation.Models;
+using ProgramCreation.Validations;
 
 namespace ProgramCreation.Data.Repositories
 {
@@ -12,24 +13,27 @@ namespace ProgramCreation.Data.Repositories
         public async Task<ProgramInfo> GetById(string programInfoId)
         {
             var result = await _container.ReadItemAsync<ProgramInfo>(programInfoId, new PartitionKey(programInfoId));
+            ProgramInfoValidation.isProgramInfoExists(result.Resource);
             return result.Resource;
         }
 
         public async Task<string> Add(ProgramInfo programInfo)
         {
+            ProgramInfoValidation.Validate(programInfo);
             programInfo.id = Guid.NewGuid().ToString();
             var result = await _container.CreateItemAsync(programInfo);
             return programInfo.id;
         }
 
-        public async Task Delete(string programId)
+        public async Task Delete(string programInfoId)
         {
-            var result = await _container.DeleteItemAsync<object>(programId, new PartitionKey(programId));
+            await this.GetById(programInfoId);
+            var result = await _container.DeleteItemAsync<object>(programInfoId, new PartitionKey(programInfoId));
         }
 
         public async Task<ProgramInfo> Update(ProgramInfo programInfo)
         {
-            ProgramInfo result = await _container.ReadItemAsync<ProgramInfo>(programInfo.id, new PartitionKey(programInfo.id));
+            ProgramInfo result = await this.GetById(programInfo.id);
             result = programInfo;
             var finalResult = await _container.ReplaceItemAsync<ProgramInfo>(programInfo, programInfo.id, new PartitionKey(programInfo.id));
             return finalResult.Resource;

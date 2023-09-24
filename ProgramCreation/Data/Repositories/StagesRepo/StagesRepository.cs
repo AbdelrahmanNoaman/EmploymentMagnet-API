@@ -2,6 +2,7 @@
 using ProgramCreation.Interfaces;
 using ProgramCreation.Models;
 using Microsoft.Azure.Cosmos;
+using ProgramCreation.Validations;
 
 namespace ProgramCreation.Data.Repositories
 {
@@ -12,6 +13,7 @@ namespace ProgramCreation.Data.Repositories
         public async Task<StageDTO> GetById(StageInfoDTO StageInfo)
         {
             var result = await _container.ReadItemAsync<StageDTO>(StageInfo.id, new PartitionKey(StageInfo.Type));
+            StageValidation.isStageExists(result.Resource);
             return result.Resource;
         }
 

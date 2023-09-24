@@ -27,32 +27,17 @@ namespace ProgramCreation.Data.Repositories
         public async Task<string> Add(ProgramForm form)
         {
             form.id = Guid.NewGuid().ToString();
-            try
-            {
-                var result = await _container.CreateItemAsync(form);
-                return form.id;
-            }
-            catch (Exception error)
-            {
-                Console.WriteLine(error);
-                return null;
-            }
+            var result = await _container.CreateItemAsync(form);
+            return form.id;
         }
 
         public async Task Delete(string formId)
         {
-            try
-            {
-                var result = await _container.DeleteItemAsync<object>(formId, new PartitionKey(formId));
-            }
-            catch (Exception error)
-            {
-                Console.WriteLine(error);
-            }
+            await this.GetById(formId);
+            var result = await _container.DeleteItemAsync<object>(formId, new PartitionKey(formId));
         }
         public async Task AddQuestion(string formId, QuestionInfoDTO quesInfo)
         {
-
             ProgramForm form = await GetById(formId);
             FormValidation.checkForQuestionInfo(quesInfo);
             await FormValidation.checkForQuestionAdd(formId,quesInfo);
