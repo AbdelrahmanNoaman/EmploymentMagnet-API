@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using ProgramCreation.Interfaces;
 using ProgramCreation.DTOs;
 using Microsoft.Azure.Cosmos;
+using ProgramCreation.Validations;
 
 namespace ProgramCreation.Data.Repositories
 {
@@ -17,6 +18,7 @@ namespace ProgramCreation.Data.Repositories
         public async Task<ProgramForm> GetById(string formId)
         {
             var result = await _container.ReadItemAsync<ProgramForm>(formId, new PartitionKey(formId));
+            FormValidation.checkForForm(result.Resource);
             return result.Resource;
         }
 
@@ -50,7 +52,10 @@ namespace ProgramCreation.Data.Repositories
         }
         public async Task AddQuestion(string formId, QuestionInfoDTO quesInfo)
         {
+
             ProgramForm form = await GetById(formId);
+            FormValidation.checkForQuestionInfo(quesInfo);
+            await FormValidation.checkForQuestionAdd(formId,quesInfo);
             form.QuestionsIds.Add(quesInfo);
             await _container.ReplaceItemAsync(form, formId, new PartitionKey(formId));
         }
@@ -58,6 +63,8 @@ namespace ProgramCreation.Data.Repositories
         public async Task DeleteQuestion(string formId, QuestionInfoDTO quesInfo)
         {
             ProgramForm form = await GetById(formId);
+            FormValidation.checkForQuestionInfo(quesInfo);
+            await FormValidation.checkForQuestionRemove(formId, quesInfo);
             form.QuestionsIds.RemoveAll(info => info.id == quesInfo.id && info.Type == quesInfo.Type);
             await _container.ReplaceItemAsync(form, formId, new PartitionKey(formId));
         }

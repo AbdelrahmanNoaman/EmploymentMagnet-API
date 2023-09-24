@@ -26,12 +26,12 @@ namespace ProgramCreation.Controllers
             }
             catch (userDefinedException err)
             {
-                ResponseDTO<QuestionInfoDTO> response = new(err.StatusCode, err.Message, null);
+                ResponseDTO<QuestionDTO> response = new(err.StatusCode, err.Message, null);
                 return response;
             }
             catch (Exception error)
             {
-                ResponseDTO<QuestionInfoDTO> response = new(500, "Internal Server Error", null);
+                ResponseDTO<QuestionDTO> response = new(500, "Internal Server Error", null);
                 return response;
             }
         }

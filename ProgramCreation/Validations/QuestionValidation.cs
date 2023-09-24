@@ -50,7 +50,7 @@ namespace ProgramCreation.Validations
             if(found==false)
                 throw new userDefinedException(400, "This is Not a valid Question Type");
 
-            if((question.Type=="Multiple choice" || question.Type == "Dropdown")&& question.Choices == null)
+            if((question.Type=="Multiple choice" || question.Type == "Dropdown")&& (question.Choices == null || question.Choices?.Count<=1))
                  throw new userDefinedException(400, "Choices are required as you chose a choice question");
             
             if (question.Type == "Yes/No" && question.IsDisqualified == null)
@@ -61,9 +61,6 @@ namespace ProgramCreation.Validations
             
             if (question.SectionName == "Profile" && question.IsMandatory == null)
                 throw new userDefinedException(400, "isMandatory is required");
-
-
-
         }
     }
 }
