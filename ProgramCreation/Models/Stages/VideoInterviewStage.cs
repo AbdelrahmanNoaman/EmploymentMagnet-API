@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ProgramCreation.Enums;
-using ProgramCreation.Models.Stages.Base_Stages;
+using ProgramCreation.Models;
 
-namespace ProgramCreation.Models.Stages
+namespace ProgramCreation.Models
 {
     public class VideoInterviewStage:Stage
     {

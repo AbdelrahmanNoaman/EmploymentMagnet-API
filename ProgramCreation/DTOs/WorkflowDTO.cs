@@ -1,10 +1,10 @@
-﻿using ProgramCreation.Models.Workflow;
+﻿using ProgramCreation.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ProgramCreation.Models.Stages;
+using ProgramCreation.Models;
 
 namespace ProgramCreation.DTOs
 {

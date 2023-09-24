@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProgramCreation.Models.Forms
+namespace ProgramCreation.Models
 {
     public class ProgramForm
     {

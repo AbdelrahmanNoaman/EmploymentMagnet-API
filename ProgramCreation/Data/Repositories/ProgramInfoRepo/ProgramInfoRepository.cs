@@ -1,21 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ProgramCreation.Interfaces;
-using ProgramCreation.DTOs;
+﻿using ProgramCreation.Interfaces;
 using Microsoft.Azure.Cosmos;
-using ProgramCreation.Models.Factory;
-using ProgramCreation.Models.Forms;
-using ProgramCreation.Models.ProgramInfo;
-using ProgramCreation.Models.Questions;
+using ProgramCreation.Models;
 
 namespace ProgramCreation.Data.Repositories
 {
-    public class ProgramInfoRepository: IRepository<ProgramInfo, string>
+    public class ProgramInfoRepository : IRepository<ProgramInfo, string>
     {
-        private Microsoft.Azure.Cosmos.Container _container = new DbContext().GetContainer("programinfo");
+        private Container _container = new DbContext().GetContainer("programinfo");
 
 
         public async Task<ProgramInfo> GetById(string programInfoId)
@@ -24,7 +15,7 @@ namespace ProgramCreation.Data.Repositories
             return result.Resource;
         }
 
-        public async Task<String> Add(ProgramInfo programInfo)
+        public async Task<string> Add(ProgramInfo programInfo)
         {
             programInfo.id = Guid.NewGuid().ToString();
             var result = await _container.CreateItemAsync(programInfo);
@@ -33,7 +24,7 @@ namespace ProgramCreation.Data.Repositories
 
         public async Task Delete(string programId)
         {
-            var result = await _container.DeleteItemAsync<Object>(programId, new PartitionKey(programId));
+            var result = await _container.DeleteItemAsync<object>(programId, new PartitionKey(programId));
         }
 
         public async Task<ProgramInfo> Update(ProgramInfo programInfo)

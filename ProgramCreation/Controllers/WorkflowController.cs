@@ -1,10 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ProgramCreation.Data.Repositories;
 using ProgramCreation.DTOs;
-using ProgramCreation.Models.Forms;
-using ProgramCreation.Models.Stages;
-using ProgramCreation.Models.Stages.Base_Stages;
-using ProgramCreation.Models.Workflow;
+using ProgramCreation.Models;
 
 namespace ProgramCreation.Controllers
 {

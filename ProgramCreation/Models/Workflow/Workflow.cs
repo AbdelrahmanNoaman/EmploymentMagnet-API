@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ProgramCreation.DTOs;
-using ProgramCreation.Models.Stages.Base_Stages;
+using ProgramCreation.Models;
 
-namespace ProgramCreation.Models.Workflow
+namespace ProgramCreation.Models
 {
     public class Workflow
     {

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProgramCreation.Models.Questions
+namespace ProgramCreation.Models
 {
     public class DropdownQuestion : ChoiceQuestion, IQuestion
     {

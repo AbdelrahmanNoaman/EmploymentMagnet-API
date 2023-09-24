@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProgramCreation.Models.Stages.Base_Stages
+namespace ProgramCreation.Models
 {
     public class Stage
     {

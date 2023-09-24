@@ -1,12 +1,13 @@
 ﻿using ProgramCreation.DTOs;
 using ProgramCreation.Interfaces;
-using ProgramCreation.Models.Stages.Base_Stages;
+using ProgramCreation.Models;
 using Microsoft.Azure.Cosmos;
+
 namespace ProgramCreation.Data.Repositories
 {
-    public class StagesRepository:IRepository<StageDTO,StageInfoDTO>
+    public class StagesRepository : IRepository<StageDTO, StageInfoDTO>
     {
-        private Microsoft.Azure.Cosmos.Container _container = new DbContext().GetContainer("stages");
+        private Container _container = new DbContext().GetContainer("stages");
 
         public async Task<StageDTO> GetById(StageInfoDTO StageInfo)
         {
@@ -23,7 +24,7 @@ namespace ProgramCreation.Data.Repositories
 
         public async Task Delete(StageInfoDTO questionInfo)
         {
-           await _container.DeleteItemAsync<Object>(questionInfo.id, new PartitionKey(questionInfo.Type));
+            await _container.DeleteItemAsync<object>(questionInfo.id, new PartitionKey(questionInfo.Type));
         }
     }
 }

@@ -1,5 +1,5 @@
 ﻿using ProgramCreation.Interfaces;
-using ProgramCreation.Models.Questions;
+using ProgramCreation.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ProgramCreation.DTOs;
 
-namespace ProgramCreation.Models.Factory
+namespace ProgramCreation.Models
 {
     public class QuestionFactory
     {

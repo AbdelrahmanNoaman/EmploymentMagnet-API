@@ -1,4 +1,4 @@
-﻿using ProgramCreation.Models.Questions;
+﻿using ProgramCreation.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,14 +7,12 @@ using System.Threading.Tasks;
 using ProgramCreation.Interfaces;
 using ProgramCreation.DTOs;
 using Microsoft.Azure.Cosmos;
-using ProgramCreation.Models.Factory;
-using ProgramCreation.Models.Forms;
 
 namespace ProgramCreation.Data.Repositories
 {
     public class FormRepository : IRepository<ProgramForm, string>
     {
-        private Microsoft.Azure.Cosmos.Container _container = new DbContext().GetContainer("forms");
+        private Container _container = new DbContext().GetContainer("forms");
 
         public async Task<ProgramForm> GetById(string formId)
         {
@@ -24,7 +22,7 @@ namespace ProgramCreation.Data.Repositories
 
 
 
-        public async Task<String> Add(ProgramForm form)
+        public async Task<string> Add(ProgramForm form)
         {
             form.id = Guid.NewGuid().ToString();
             try
@@ -43,24 +41,25 @@ namespace ProgramCreation.Data.Repositories
         {
             try
             {
-                var result = await _container.DeleteItemAsync<Object>(formId, new PartitionKey(formId));
+                var result = await _container.DeleteItemAsync<object>(formId, new PartitionKey(formId));
             }
             catch (Exception error)
             {
                 Console.WriteLine(error);
             }
         }
-        public async Task AddQuestion(string formId,QuestionInfoDTO quesInfo) {
-            ProgramForm form = await this.GetById(formId);
+        public async Task AddQuestion(string formId, QuestionInfoDTO quesInfo)
+        {
+            ProgramForm form = await GetById(formId);
             form.QuestionsIds.Add(quesInfo);
-            await _container.ReplaceItemAsync<ProgramForm>(form, formId, new PartitionKey(formId));
+            await _container.ReplaceItemAsync(form, formId, new PartitionKey(formId));
         }
 
         public async Task DeleteQuestion(string formId, QuestionInfoDTO quesInfo)
         {
-            ProgramForm form = await this.GetById(formId);
-            (form.QuestionsIds).RemoveAll(info => info.id == quesInfo.id && info.Type == quesInfo.Type);
-            await _container.ReplaceItemAsync<ProgramForm>(form, formId, new PartitionKey(formId));
+            ProgramForm form = await GetById(formId);
+            form.QuestionsIds.RemoveAll(info => info.id == quesInfo.id && info.Type == quesInfo.Type);
+            await _container.ReplaceItemAsync(form, formId, new PartitionKey(formId));
         }
     }
 }

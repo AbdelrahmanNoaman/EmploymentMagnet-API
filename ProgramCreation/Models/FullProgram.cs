@@ -4,8 +4,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
-using ProgramCreation.Models.Forms;
-using ProgramCreation.Models.ProgramInfo;
+using ProgramCreation.Models;
 
 namespace ProgramCreation.Models
 {

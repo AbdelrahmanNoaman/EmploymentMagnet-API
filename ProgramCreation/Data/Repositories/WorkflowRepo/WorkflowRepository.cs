@@ -1,14 +1,14 @@
 ﻿using ProgramCreation.DTOs;
 using ProgramCreation.Interfaces;
-using ProgramCreation.Models.Forms;
+using ProgramCreation.Models;
 using Microsoft.Azure.Cosmos;
-using ProgramCreation.Models.Workflow;
+using ProgramCreation.Models;
 
 namespace ProgramCreation.Data.Repositories
 {
     public class WorkflowRepository : IRepository<Workflow, string>
     {
-        private Microsoft.Azure.Cosmos.Container _container = new DbContext().GetContainer("workflow");
+        private Container _container = new DbContext().GetContainer("workflow");
 
         public async Task<Workflow> GetById(string WorkflowId)
         {
@@ -16,7 +16,7 @@ namespace ProgramCreation.Data.Repositories
             return result.Resource;
         }
 
-        public async Task<String> Add(Workflow workflow)
+        public async Task<string> Add(Workflow workflow)
         {
             workflow.id = Guid.NewGuid().ToString();
             var result = await _container.CreateItemAsync(workflow);
@@ -25,20 +25,20 @@ namespace ProgramCreation.Data.Repositories
 
         public async Task Delete(string workflowId)
         {
-            var result = await _container.DeleteItemAsync<Object>(workflowId, new PartitionKey(workflowId));
+            var result = await _container.DeleteItemAsync<object>(workflowId, new PartitionKey(workflowId));
         }
 
         public async Task AddStage(string workflowId, StageInfoDTO stageInfo)
         {
-            Workflow workflow = await this.GetById(workflowId);
+            Workflow workflow = await GetById(workflowId);
             workflow.Stages.Add(stageInfo);
             await _container.ReplaceItemAsync<Workflow>(workflow, workflowId, new PartitionKey(workflowId));
         }
 
         public async Task DeleteStage(string workflowId, StageInfoDTO stageInfo)
         {
-            Workflow workflow = await this.GetById(workflowId);
-            (workflow.Stages).RemoveAll(info => info.id==stageInfo.id && info.Type==stageInfo.Type);
+            Workflow workflow = await GetById(workflowId);
+            workflow.Stages.RemoveAll(info => info.id == stageInfo.id && info.Type == stageInfo.Type);
             await _container.ReplaceItemAsync<Workflow>(workflow, workflowId, new PartitionKey(workflowId));
         }
     }

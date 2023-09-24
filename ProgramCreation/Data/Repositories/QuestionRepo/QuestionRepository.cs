@@ -1,4 +1,4 @@
-﻿using ProgramCreation.Models.Questions;
+﻿using ProgramCreation.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,22 +7,22 @@ using System.Threading.Tasks;
 using ProgramCreation.Interfaces;
 using ProgramCreation.DTOs;
 using Microsoft.Azure.Cosmos;
-using ProgramCreation.Models.Factory;
+using ProgramCreation.Models;
 
 namespace ProgramCreation.Data.Repositories
 {
-    public class QuestionRepository:IRepository<QuestionDTO,QuestionInfoDTO>
+    public class QuestionRepository : IRepository<QuestionDTO, QuestionInfoDTO>
     {
-        private  Microsoft.Azure.Cosmos.Container _container = new DbContext().GetContainer("questions");
+        private Container _container = new DbContext().GetContainer("questions");
 
-        public  async Task<QuestionDTO> GetById(QuestionInfoDTO questionInfo)
+        public async Task<QuestionDTO> GetById(QuestionInfoDTO questionInfo)
         {
 
             var result = await _container.ReadItemAsync<QuestionDTO>(questionInfo.id, new PartitionKey(questionInfo.Type));
             return result.Resource;
         }
 
-        public  async Task<QuestionInfoDTO> Add(QuestionDTO question)
+        public async Task<QuestionInfoDTO> Add(QuestionDTO question)
         {
             question.id = Guid.NewGuid().ToString();
             //IQuestion newQues = QuestionFactory.CreateQuestion(question);
@@ -32,28 +32,28 @@ namespace ProgramCreation.Data.Repositories
 
         public async Task Delete(QuestionInfoDTO questionInfo)
         {
-            var result = await _container.DeleteItemAsync<Object>(questionInfo.id, new PartitionKey(questionInfo.Type));
+            var result = await _container.DeleteItemAsync<object>(questionInfo.id, new PartitionKey(questionInfo.Type));
         }
 
         public async Task ChangeQuestionHiddenState(QuestionInfoDTO questionInfo, bool state)
         {
-            QuestionDTO question = await this.GetById(questionInfo);
+            QuestionDTO question = await GetById(questionInfo);
             question.IsHidden = state;
-            var finalResult = await _container.ReplaceItemAsync<QuestionDTO>(question, question.id, new PartitionKey(question.Type));
+            var finalResult = await _container.ReplaceItemAsync(question, question.id, new PartitionKey(question.Type));
         }
 
         public async Task ChangeQuestionInternalState(QuestionInfoDTO questionInfo, bool state)
         {
-            QuestionDTO question = await this.GetById(questionInfo);
+            QuestionDTO question = await GetById(questionInfo);
             question.IsInternal = state;
-            var finalResult = await _container.ReplaceItemAsync<QuestionDTO>(question, question.id, new PartitionKey(question.Type));
+            var finalResult = await _container.ReplaceItemAsync(question, question.id, new PartitionKey(question.Type));
 
         }
         public async Task ChangeQuestionMandatoryState(QuestionInfoDTO questionInfo, bool state)
         {
-            QuestionDTO question = await this.GetById(questionInfo);
+            QuestionDTO question = await GetById(questionInfo);
             question.IsMandatory = state;
-            var finalResult = await _container.ReplaceItemAsync<QuestionDTO>(question, question.id, new PartitionKey(question.Type));
+            var finalResult = await _container.ReplaceItemAsync(question, question.id, new PartitionKey(question.Type));
 
         }
     }

@@ -1,14 +1,12 @@
-﻿using ProgramCreation.DTOs;
-using ProgramCreation.Interfaces;
+﻿using ProgramCreation.Interfaces;
 using ProgramCreation.Models;
 using Microsoft.Azure.Cosmos;
-using ProgramCreation.Models.Questions;
 
 namespace ProgramCreation.Data.Repositories
 {
     public class ProgramRepository : IRepository<FullProgram, string>
     {
-        private Microsoft.Azure.Cosmos.Container _container = new DbContext().GetContainer("programs");
+        private Container _container = new DbContext().GetContainer("programs");
 
         public async Task<FullProgram> GetById(string programId)
         {
@@ -16,7 +14,7 @@ namespace ProgramCreation.Data.Repositories
             return result.Resource;
         }
 
-        public async Task<String> Add(FullProgram program)
+        public async Task<string> Add(FullProgram program)
         {
             program.id = Guid.NewGuid().ToString();
             await _container.CreateItemAsync(program);
@@ -25,14 +23,14 @@ namespace ProgramCreation.Data.Repositories
 
         public async Task Delete(string formId)
         {
-            var result = await _container.DeleteItemAsync<Object>(formId, new PartitionKey(formId));
+            var result = await _container.DeleteItemAsync<object>(formId, new PartitionKey(formId));
         }
 
         public async Task AddProgramInfo(string programIfnoId, string programId)
         {
-            FullProgram prog = await this.GetById(programId);
+            FullProgram prog = await GetById(programId);
             prog.ProgramInfoId = programIfnoId;
-            await _container.ReplaceItemAsync<FullProgram>(prog, prog.id, new PartitionKey(prog.id));
+            await _container.ReplaceItemAsync(prog, prog.id, new PartitionKey(prog.id));
         }
     }
 }
