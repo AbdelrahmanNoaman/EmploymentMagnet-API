@@ -35,17 +35,17 @@ namespace ProgramCreation.Controllers.AdditionalControllers
 
         [Route("api/minQualification/")]
         [HttpPost]
-        public async Task<ResponseDTO<StageType>> AddStageType(MinQualification qualification)
+        public async Task<ResponseDTO<MinQualification>> AddStageType(MinQualification qualification)
         {
             try
             {
                 await _minQualificationRepo.Add(qualification);
-                ResponseDTO<StageType> response = new(200, "Min Qualification Has Been Added Successfully", type);
+                ResponseDTO<MinQualification> response = new(200, "Min Qualification Has Been Added Successfully", qualification);
                 return response;
             }
             catch (Exception error)
             {
-                ResponseDTO<StageType> response = new(500, "Internal Server Error", null);
+                ResponseDTO<MinQualification> response = new(500, "Internal Server Error", null);
                 return response;
             }
         }

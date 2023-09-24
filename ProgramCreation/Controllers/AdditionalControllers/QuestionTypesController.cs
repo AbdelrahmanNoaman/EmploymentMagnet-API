@@ -35,17 +35,17 @@ namespace ProgramCreation.Controllers.AdditionalControllers
 
         [Route("api/questionTypes/")]
         [HttpPost]
-        public async Task<ResponseDTO<StageType>> AddStageType(QuestionTypes type)
+        public async Task<ResponseDTO<QuestionTypes>> AddStageType(QuestionTypes type)
         {
             try
             {
                 await _questionTypesRepo.Add(type);
-                ResponseDTO<StageType> response = new(200, "Question Type Has Been Added Successfully", type);
+                ResponseDTO<QuestionTypes> response = new(200, "Question Type Has Been Added Successfully", type);
                 return response;
             }
             catch (Exception error)
             {
-                ResponseDTO<StageType> response = new(500, "Internal Server Error", null);
+                ResponseDTO<QuestionTypes> response = new(500, "Internal Server Error", null);
                 return response;
             }
         }
