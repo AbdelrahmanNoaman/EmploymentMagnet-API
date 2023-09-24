@@ -40,7 +40,7 @@ namespace ProgramCreation.Data.Repositories
         {
             ProgramForm form = await GetById(formId);
             FormValidation.checkForQuestionInfo(quesInfo);
-            await FormValidation.checkForQuestionAdd(formId,quesInfo);
+            await FormValidation.checkForQuestionAdd(form,quesInfo);
             form.QuestionsIds.Add(quesInfo);
             await _container.ReplaceItemAsync(form, formId, new PartitionKey(formId));
         }
@@ -49,7 +49,7 @@ namespace ProgramCreation.Data.Repositories
         {
             ProgramForm form = await GetById(formId);
             FormValidation.checkForQuestionInfo(quesInfo);
-            await FormValidation.checkForQuestionRemove(formId, quesInfo);
+            await FormValidation.checkForQuestionRemove(form, quesInfo);
             form.QuestionsIds.RemoveAll(info => info.id == quesInfo.id && info.Type == quesInfo.Type);
             await _container.ReplaceItemAsync(form, formId, new PartitionKey(formId));
         }

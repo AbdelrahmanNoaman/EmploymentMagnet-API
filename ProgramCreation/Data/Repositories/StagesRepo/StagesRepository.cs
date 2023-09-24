@@ -20,13 +20,15 @@ namespace ProgramCreation.Data.Repositories
         public async Task<StageInfoDTO> Add(StageDTO stage)
         {
             stage.id = Guid.NewGuid().ToString();
+            await StageValidation.Validate(stage);
             var result = await _container.CreateItemAsync(stage);
             return new StageInfoDTO { id = stage.id, Type = stage.Type };
         }
 
-        public async Task Delete(StageInfoDTO questionInfo)
+        public async Task Delete(StageInfoDTO stageInfo)
         {
-            await _container.DeleteItemAsync<object>(questionInfo.id, new PartitionKey(questionInfo.Type));
+            await this.GetById(stageInfo);
+            await _container.DeleteItemAsync<object>(stageInfo.id, new PartitionKey(stageInfo.Type));
         }
     }
 }

@@ -24,11 +24,8 @@ namespace ProgramCreation.Validations
             if (form == null)
                 throw new userDefinedException(400, "This Form Doesn't Exist");
         }
-        public async static Task checkForQuestionAdd(string formId, QuestionInfoDTO question)
+        public async static Task checkForQuestionAdd(ProgramForm form, QuestionInfoDTO question)
         {
-            FormRepository formRepository = new();
-            ProgramForm form = await formRepository.GetById(formId);
-
             foreach( QuestionInfoDTO quesId in form.QuestionsIds)
             {
                 if (quesId.id == question.id)
@@ -38,23 +35,16 @@ namespace ProgramCreation.Validations
             }
         }
 
-        public async static Task checkForQuestionRemove(string formId, QuestionInfoDTO question)
+        public async static Task checkForQuestionRemove(ProgramForm form, QuestionInfoDTO question)
         {
-            FormRepository formRepository = new();
-            ProgramForm form = await formRepository.GetById(formId);
-            bool found = false;
             foreach (QuestionInfoDTO quesId in form.QuestionsIds)
             {
                 if (quesId.id == question.id)
                 {
-                    found = true; break;
+                    return;
                 }
             }
-            if (found == false)
-            {
-                throw new userDefinedException(400, "This Question Doesn't Exist");
-
-            }
+            throw new userDefinedException(400, "This Question Doesn't Exist in that form");
         }
     }
 }
