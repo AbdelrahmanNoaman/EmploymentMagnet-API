@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using ProgramCreation.Interfaces;
 using ProgramCreation.DTOs;
 using Microsoft.Azure.Cosmos;
-using ProgramCreation.Models;
+using ProgramCreation.Validations;
 
 namespace ProgramCreation.Data.Repositories
 {
@@ -19,11 +19,13 @@ namespace ProgramCreation.Data.Repositories
         {
 
             var result = await _container.ReadItemAsync<QuestionDTO>(questionInfo.id, new PartitionKey(questionInfo.Type));
+            QuestionValidation.IsQuestionExist(result.Resource);
             return result.Resource;
         }
 
         public async Task<QuestionInfoDTO> Add(QuestionDTO question)
         {
+            await QuestionValidation.checkQuestionData(question);
             question.id = Guid.NewGuid().ToString();
             //IQuestion newQues = QuestionFactory.CreateQuestion(question);
             var result = await _container.CreateItemAsync(question);
@@ -32,6 +34,7 @@ namespace ProgramCreation.Data.Repositories
 
         public async Task Delete(QuestionInfoDTO questionInfo)
         {
+            QuestionDTO question = await GetById(questionInfo);
             var result = await _container.DeleteItemAsync<object>(questionInfo.id, new PartitionKey(questionInfo.Type));
         }
 
@@ -47,14 +50,12 @@ namespace ProgramCreation.Data.Repositories
             QuestionDTO question = await GetById(questionInfo);
             question.IsInternal = state;
             var finalResult = await _container.ReplaceItemAsync(question, question.id, new PartitionKey(question.Type));
-
         }
         public async Task ChangeQuestionMandatoryState(QuestionInfoDTO questionInfo, bool state)
         {
             QuestionDTO question = await GetById(questionInfo);
             question.IsMandatory = state;
             var finalResult = await _container.ReplaceItemAsync(question, question.id, new PartitionKey(question.Type));
-
         }
     }
 }

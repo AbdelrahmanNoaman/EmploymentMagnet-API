@@ -10,12 +10,9 @@ namespace ProgramCreation.DTOs
     public class QuestionDTO
     {
             public string? id { get; set; }
-        [Required]
-            public string Title { get; set; }
-        [Required]
-            public string Type { get; set; }
-        [Required]
-            public string SectionName { get; set; }
+            public string? Title { get; set; }
+            public string? Type { get; set; }
+            public string? SectionName { get; set; }
             public List<string>? Choices { get; set; }
             public bool? EnableOther { get; set; }
             public int? MaxChoiceAllowed { get; set; }

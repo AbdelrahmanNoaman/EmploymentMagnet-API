@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using ProgramCreation.Data.Repositories;
+using ProgramCreation.Exceptions;
 
 namespace ProgramCreation.Controllers
 {
@@ -23,9 +24,14 @@ namespace ProgramCreation.Controllers
                 ResponseDTO<QuestionDTO> response = new(200, "Question Has Been Returned Successfully", question);
                 return response;
             }
+            catch (userDefinedException err)
+            {
+                ResponseDTO<QuestionInfoDTO> response = new(err.StatusCode, err.Message, null);
+                return response;
+            }
             catch (Exception error)
             {
-                ResponseDTO<QuestionDTO> response = new(500, "Internal Server Error", null);
+                ResponseDTO<QuestionInfoDTO> response = new(500, "Internal Server Error", null);
                 return response;
             }
         }
@@ -38,6 +44,11 @@ namespace ProgramCreation.Controllers
             {
                 QuestionInfoDTO question = await _quesRepo.Add(ques);
                 ResponseDTO<QuestionInfoDTO> response = new(200, "Question Has Been Added Successfully", question);
+                return response;
+            }
+            catch(userDefinedException err)
+            {
+                ResponseDTO<QuestionInfoDTO> response = new(err.StatusCode,err.Message, null);
                 return response;
             }
             catch (Exception error)
@@ -54,12 +65,17 @@ namespace ProgramCreation.Controllers
             try
             {
                 await _quesRepo.ChangeQuestionHiddenState(questionInfo, true);
-                ResponseDTO<String> response = new(200, "Question Has Been Hidden Successfully", "Hidden");
+                ResponseDTO<string> response = new(200, "Question Has Been Hidden Successfully", "Hidden");
+                return response;
+            }
+            catch (userDefinedException err)
+            {
+                ResponseDTO<string> response = new(err.StatusCode, err.Message, null);
                 return response;
             }
             catch (Exception error)
             {
-                ResponseDTO<String> response = new(500, "Internal Server Error", "Cannot be Hidden");
+                ResponseDTO<string> response = new(500, "Internal Server Error", "Cannot be Hidden");
                 return response;
             }
         }
@@ -71,12 +87,17 @@ namespace ProgramCreation.Controllers
             try
             {
                 await _quesRepo.ChangeQuestionHiddenState(questionInfo, false);
-                ResponseDTO<String> response = new(200, "Question Has Been Unhidden Successfully", "Unhidden");
+                ResponseDTO<string> response = new(200, "Question Has Been Unhidden Successfully", "Unhidden");
+                return response;
+            }
+            catch (userDefinedException err)
+            {
+                ResponseDTO<string> response = new(err.StatusCode, err.Message, null);
                 return response;
             }
             catch (Exception error)
             {
-                ResponseDTO<String> response = new(500, "Internal Server Error", "Cannot be Unhidden");
+                ResponseDTO<string> response = new(500, "Internal Server Error", "Cannot be Unhidden");
                 return response;
             }
         }
@@ -88,12 +109,17 @@ namespace ProgramCreation.Controllers
             try
             {
                 await _quesRepo.ChangeQuestionMandatoryState(questionInfo, true);
-                ResponseDTO<String> response = new(200, "Question Has Been Marked as Mandatory Successfully", "Hidden");
+                ResponseDTO<string> response = new(200, "Question Has Been Marked as Mandatory Successfully", "Hidden");
+                return response;
+            }
+            catch (userDefinedException err)
+            {
+                ResponseDTO<string> response = new(err.StatusCode, err.Message, null);
                 return response;
             }
             catch (Exception error)
             {
-                ResponseDTO<String> response = new(500, "Internal Server Error", "Cannot be marked as Mandatory");
+                ResponseDTO<string> response = new(500, "Internal Server Error", "Cannot be marked as Mandatory");
                 return response;
             }
         }
@@ -105,12 +131,17 @@ namespace ProgramCreation.Controllers
             try
             {
                 await _quesRepo.ChangeQuestionMandatoryState(questionInfo, false);
-                ResponseDTO<String> response = new(200, "Question Has Been Marked as Not Mandatory Successfully", "Unhidden");
+                ResponseDTO<string> response = new(200, "Question Has Been Marked as Not Mandatory Successfully", "Unhidden");
+                return response;
+            }
+            catch (userDefinedException err)
+            {
+                ResponseDTO<string> response = new(err.StatusCode, err.Message, null);
                 return response;
             }
             catch (Exception error)
             {
-                ResponseDTO<String> response = new(500, "Internal Server Error", "Cannot be marked as not Mandatory");
+                ResponseDTO<string> response = new(500, "Internal Server Error", "Cannot be marked as not Mandatory");
                 return response;
             }
         }
