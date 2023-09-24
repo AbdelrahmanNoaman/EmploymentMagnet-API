@@ -1,13 +1,13 @@
 # 🚀 Employment Magnet
 
-- 📚 [Overview](#about)
-- ✨ [Features](#features)
-- 🚀 [Getting Started](#gettingStarted)
-- 📖 [Usage](#usage)
-- 🔧 [Dependencies and Design Patterns](#dependenciesanddesignpatterns)
-- 👥 [Contributors](#contributors)
-- 📄 [License](#license)
-- 
+- 📚 [Overview]
+- ✨ [Features]
+- 🚀 [Getting Started]
+- 📖 [Usage]
+- 🔧 [Dependencies and Design Patterns]
+- 👥 [Contributors]
+- 📄 [License]
+
 ## 📚 Overview
 This project is a console application developed using C# and .NET 6. It implements an API using ASP.NET for creating and managing custom internship, full-time, or part-time programs. With this application, users can design and configure their own programs, including the program's structure, questions, styles, and various features.
 
